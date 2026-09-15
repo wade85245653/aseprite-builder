@@ -133,3 +133,13 @@ jobs:
           file: aseprite/build/bin/Aseprite-${{ needs.create-release.outputs.release-tag }}-${{ runner.os }}.zip
           asset_name: Aseprite-${{ needs.create-release.outputs.release-tag }}-${{ runner.os }}.zip
           tag: ${{ needs.create-release.outputs.release-tag }}
+# ===== 新增：下载简体中文汉化扩展 =====
+- name: 下载 Aseprite 简体中文扩展
+  run: |
+    cd bin
+    mkdir -p extensions
+    cd extensions
+    curl -L -o chinese.aseprite-extension https://github.com/aseprite/translations/releases/download/zh_CN/zh_CN.aseprite-extension
+    # 解压扩展包
+    unzip -o chinese.aseprite-extension -d zh_CN
+  shell: bash
